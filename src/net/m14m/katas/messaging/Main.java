@@ -17,10 +17,11 @@ public class Main {
 	public static void main(String... args) {
 		SendEmail sendEmail = new SendEmail(network);
 		BadEmailAddress badEmailAddress = new BadEmailAddress(console);
+		MissingEmailBody missingEmailBody = new MissingEmailBody(console);
 
-		badEmailAddress.otherwise(sendEmail);
+		missingEmailBody.otherwise(badEmailAddress).otherwise(sendEmail);
 
 		Runner runner = new Runner();
-		runner.start(badEmailAddress).using(args);
+		runner.start(missingEmailBody).using(args);
 	}
 }
