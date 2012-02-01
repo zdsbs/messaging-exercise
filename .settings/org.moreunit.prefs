@@ -1,0 +1,7 @@
+#Tue Jan 31 20:29:33 EST 2012
+eclipse.preferences.version=1
+org.moreunit.prefixes=
+org.moreunit.test_methodType=testMethodTypeNoPrefix
+org.moreunit.test_type=junit4
+org.moreunit.unitsourcefolder=messaging-exercise\:src\:messaging-exercise\:test
+org.moreunit.useprojectsettings=true
