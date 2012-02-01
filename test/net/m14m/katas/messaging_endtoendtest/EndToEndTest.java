@@ -38,7 +38,6 @@ public class EndToEndTest {
 		consoleShouldReceive(NO_OUTPUT);
 	}
 
-	@Ignore
 	@Test
 	public void showAnErrorAndDoNotSendIfTheEmailAddressIsInvalid() {
 		Main.main("no at sign", "Hi there!");

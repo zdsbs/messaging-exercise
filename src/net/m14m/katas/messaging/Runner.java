@@ -2,15 +2,15 @@ package net.m14m.katas.messaging;
 
 public class Runner {
 
-	private SendEmail sendEmail;
+	private Action startAction;
 
-	public Runner start(SendEmail sendEmail) {
-		this.sendEmail = sendEmail;
+	public Runner start(Action startAction) {
+		this.startAction = startAction;
 		return this;
 	}
 
 	public void using(String[] args) {
-		sendEmail.apply(args[0], args[1]);
+		startAction.apply(args[0], args[1]);
 	}
 
 }

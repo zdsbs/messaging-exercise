@@ -15,9 +15,11 @@ public class Main {
 	}
 
 	public static void main(String... args) {
-		Runner runner = new Runner();
 		SendEmail sendEmail = new SendEmail(network);
+		BadEmailAddress badEmailAddress = new BadEmailAddress(console);
+		badEmailAddress.otherwise(sendEmail);
 
-		runner.start(sendEmail).using(args);
+		Runner runner = new Runner();
+		runner.start(badEmailAddress).using(args);
 	}
 }
