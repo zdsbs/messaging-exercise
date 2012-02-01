@@ -17,6 +17,7 @@ public class Main {
 	public static void main(String... args) {
 		SendEmail sendEmail = new SendEmail(network);
 		BadEmailAddress badEmailAddress = new BadEmailAddress(console);
+
 		badEmailAddress.otherwise(sendEmail);
 
 		Runner runner = new Runner();
