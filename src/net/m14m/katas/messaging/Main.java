@@ -18,10 +18,22 @@ public class Main {
 		SendEmail sendEmail = new SendEmail(network);
 		BadEmailAddress badEmailAddress = new BadEmailAddress(console);
 		MissingEmailBody missingEmailBody = new MissingEmailBody(console);
+		ForeachEmailAddress foreachEmailAddress = new ForeachEmailAddress();
+		missingEmailBody.otherwise(badEmailAddress).otherwise(noop());
 
-		missingEmailBody.otherwise(badEmailAddress).otherwise(sendEmail);
+		foreachEmailAddress.run(missingEmailBody).noErros(sendEmail);
 
 		Runner runner = new Runner();
-		runner.start(missingEmailBody).using(args);
+		runner.start(foreachEmailAddress).using(args);
+	}
+
+	private static Action noop() {
+		return new Action() {
+
+			@Override
+			public void apply(String address, String body) {
+
+			}
+		};
 	}
 }

@@ -52,7 +52,6 @@ public class EndToEndTest {
 		consoleShouldReceive("Cannot send an email with no body.\n");
 	}
 
-	@Ignore
 	@Test
 	public void sendAnEmailToMultipleAddresses() {
 		Main.main("sally@example.com,joe@example.com", "Hi everyone!");
