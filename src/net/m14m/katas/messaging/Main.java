@@ -15,6 +15,15 @@ public class Main {
 	}
 
 	public static void main(String... args) {
+		String to = args[0];
+		String body = args[1];
+		NoAtSignInAddressChecker noAtSignInAddressChecker = new NoAtSignInAddressChecker(console);
+		SendsEmail sendsEmail = new SendsEmail(network);
+		Controller controller = new Controller();
+
+		controller.check(noAtSignInAddressChecker).onNoError(sendsEmail);
+
+		controller.doYourThing(to, body);
 	}
 
 }
