@@ -1,26 +1,32 @@
 package net.m14m.katas.messaging;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Controller {
-
-	private SendsEmail sendsEmail;
-	private NoAtSignInAddressChecker invalidAddressChecker;
-
-	public Controller check(NoAtSignInAddressChecker invalidAddressChecker) {
-		this.invalidAddressChecker = invalidAddressChecker;
+	
+	private final EmailAddresses emailAddresses;
+	private final Body body;
+	private List<ProcessingStep> processingSteps = new ArrayList<ProcessingStep>();
+	
+	public Controller(EmailAddresses emailAddresses, Body body) {
+		this.emailAddresses = emailAddresses;
+		this.body = body;
+	}
+	
+	public Controller process(ProcessingStep processingStep) {
+		processingSteps.add(processingStep);
 		return this;
 	}
-
-	public Controller onNoError(SendsEmail sendsEmail) {
-		this.sendsEmail = sendsEmail;
-		return this;
-	}
-
-	public void doYourThing(String to, String body) {
-		if (invalidAddressChecker.valid(to)) {
-			sendsEmail.sendMail(to, body);
-		} else {
-			invalidAddressChecker.writeError();
+	
+	public void run() {
+		boolean previousPassed = true;
+		for (ProcessingStep processingStep : processingSteps) {
+			if (processingStep.shortCircut(emailAddresses, body, previousPassed)) {
+				continue;
+			}
+			previousPassed = processingStep.process(emailAddresses, body);
 		}
 	}
-
+	
 }
